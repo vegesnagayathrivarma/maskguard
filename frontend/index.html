@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MaskGuard</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header>
+    <div class="logo">🎭 MaskGuard</div>
+    <p>Real-time Face Mask Detection powered by CNN</p>
+  </header>
+
+  <main>
+    <!-- Stats Bar -->
+    <div class="stats-bar">
+      <div class="stat">
+        <span id="statFaces">0</span>
+        <label>Faces Detected</label>
+      </div>
+      <div class="stat">
+        <span id="statMask" class="green">0</span>
+        <label>With Mask</label>
+      </div>
+      <div class="stat">
+        <span id="statNoMask" class="red">0</span>
+        <label>Without Mask</label>
+      </div>
+      <div class="stat">
+        <span id="statFPS">0</span>
+        <label>FPS</label>
+      </div>
+    </div>
+
+    <!-- Video Feed -->
+    <div class="feed-container">
+      <div class="feed-box">
+        <div class="feed-label">📷 Live Camera</div>
+        <video id="video" autoplay playsinline></video>
+      </div>
+      <div class="feed-box">
+        <div class="feed-label">🧠 AI Detection</div>
+        <img id="output" src="" alt="Detection output"/>
+        <div id="noDetection" class="no-detection">Start camera to begin</div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="startBtn" onclick="startCamera()">▶ Start Camera</button>
+      <button id="stopBtn" onclick="stopCamera()" disabled>⏹ Stop</button>
+      <div class="interval-control">
+        <label>Detection Speed:</label>
+        <select id="intervalSelect" onchange="updateInterval()">
+          <option value="500">Slow (2fps)</option>
+          <option value="200" selected>Normal (5fps)</option>
+          <option value="100">Fast (10fps)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Results Panel -->
+    <div id="resultsPanel" class="results-panel hidden">
+      <h3>Detection Results</h3>
+      <div id="resultsList"></div>
+    </div>
+
+    <!-- Error -->
+    <div id="error" class="error hidden"></div>
+  </main>
+
+  <!-- Hidden canvas for frame capture -->
+  <canvas id="canvas" style="display:none"></canvas>
+
+  <script src="app.js"></script>
+</body>
+</html>
